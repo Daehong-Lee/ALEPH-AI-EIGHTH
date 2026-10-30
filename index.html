@@ -733,7 +733,7 @@
 
         <div id="passkey-management" class="private-card" hidden>
           <h3>내 패스키 관리</h3>
-          <p class="private-status">패스키는 두 개 이상 등록해 두면 한 기기를 잃어도 다른 패스키로 들어갈 수 있습니다.</p>
+          <p class="private-status">현재 로그인한 계정에 패스키를 등록하거나 기존 패스키를 관리할 수 있습니다.</p>
           <div id="passkey-list" class="passkey-list"></div>
           <div class="private-actions">
             <button id="passkey-register" class="btn btn-primary" type="button">새 패스키 등록</button>
@@ -940,13 +940,37 @@
       setStatus("로그아웃되었습니다. 비공개 자료는 다시 인증해야 볼 수 있습니다.");
     }
 
+    async function initializeAuthState() {
+      const { data, error } = await supabaseClient.auth.getSession();
+
+      if (error) {
+        console.error("세션 확인 실패:", error);
+        return;
+      }
+
+      if (!data?.session) {
+        return;
+      }
+
+      // 최초 인증 링크로 들어온 직후에도 현재 세션이 있으면
+      // 패스키 관리 영역을 즉시 보여줍니다.
+      management.hidden = false;
+      await refreshPasskeys();
+
+      // 이미 패스키가 등록된 계정이면 비공개 자료도 함께 표시합니다.
+      // 등록 전에는 패스키 관리 영역에서 "새 패스키 등록"을 누르면 됩니다.
+      await loadPrivateNotes();
+      setStatus("현재 계정으로 인증되었습니다. 패스키를 등록하거나 관리하세요.");
+    }
+
     $("bootstrap-login").addEventListener("click", bootstrapSession);
     $("passkey-login").addEventListener("click", signInWithPasskey);
     $("passkey-logout").addEventListener("click", logout);
     $("passkey-register").addEventListener("click", registerPasskey);
 
-    // 페이지를 새로 열면 세션을 복구하지 않습니다.
-    // 비공개 자료는 반드시 다시 패스키 인증을 거쳐 서버에서 받아옵니다.
+    // 최초 인증 링크로 돌아온 경우에도 현재 메모리 세션을 확인하여
+    // "새 패스키 등록" 기능을 바로 표시합니다.
+    initializeAuthState();
   </script>
 
 </body>
