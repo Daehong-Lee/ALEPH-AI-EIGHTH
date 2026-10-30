@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="취업을 위한 개인 포트폴리오 소개 페이지">
+  <title>My Portfolio | 성장과 역량</title>
+
+  <style>
+    :root {
+      --bg: #f6f7fb;
+      --surface: #ffffff;
+      --text: #171923;
+      --muted: #6b7280;
+      --line: #e5e7eb;
+      --accent: #2563eb;
+      --accent-dark: #1d4ed8;
+      --soft-blue: #eff6ff;
+      --shadow: 0 18px 50px rgba(15, 23, 42, 0.08);
+      --radius: 22px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Pretendard", "Noto Sans KR", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1100px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    /* Header */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(229, 231, 235, 0.8);
+    }
+
+    .nav {
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+      font-size: 14px;
+      color: #4b5563;
+    }
+
+    .nav-links a {
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    /* Hero */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 120px 0 80px;
+      background:
+        radial-gradient(circle at 85% 20%, rgba(37, 99, 235, 0.12), transparent 28%),
+        radial-gradient(circle at 10% 80%, rgba(59, 130, 246, 0.08), transparent 25%);
+    }
+
+    .hero-content {
+      max-width: 800px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      padding: 8px 13px;
+      margin-bottom: 22px;
+      border-radius: 999px;
+      background: var(--soft-blue);
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .hero h1 {
+      font-size: clamp(42px, 7vw, 76px);
+      line-height: 1.08;
+      letter-spacing: -0.065em;
+      margin-bottom: 26px;
+    }
+
+    .hero h1 span {
+      color: var(--accent);
+    }
+
+    .hero p {
+      max-width: 650px;
+      color: var(--muted);
+      font-size: 18px;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 36px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 13px 20px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 700;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .btn-primary {
+      color: white;
+      background: var(--accent);
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-dark);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: white;
+      border: 1px solid var(--line);
+    }
+
+    .btn-secondary:hover {
+      transform: translateY(-2px);
+    }
+
+    /* Sections */
+    section {
+      padding: 110px 0;
+    }
+
+    .section-header {
+      margin-bottom: 45px;
+    }
+
+    .section-number {
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .section-header h2 {
+      font-size: clamp(30px, 5vw, 46px);
+      letter-spacing: -0.05em;
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+
+    .section-header p {
+      color: var(--muted);
+    }
+
+    /* Strength */
+    .strength-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .strength-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 30px;
+      box-shadow: var(--shadow);
+      transition: transform 0.25s ease;
+    }
+
+    .strength-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card-icon {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      background: var(--soft-blue);
+      color: var(--accent);
+      font-weight: 900;
+      margin-bottom: 22px;
+    }
+
+    .strength-card h3 {
+      font-size: 19px;
+      margin-bottom: 10px;
+      letter-spacing: -0.03em;
+    }
+
+    .strength-card p {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    /* Credentials */
+    .credential-list {
+      display: grid;
+      gap: 16px;
+    }
+
+    .credential {
+      display: grid;
+      grid-template-columns: 90px 1fr auto;
+      align-items: center;
+      gap: 25px;
+      padding: 26px 30px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .credential-icon {
+      width: 62px;
+      height: 62px;
+      display: grid;
+      place-items: center;
+      border-radius: 16px;
+      background: var(--soft-blue);
+      color: var(--accent);
+      font-weight: 900;
+      font-size: 13px;
+      text-align: center;
+    }
+
+    .credential h3 {
+      font-size: 18px;
+      margin-bottom: 3px;
+      letter-spacing: -0.03em;
+    }
+
+    .credential p {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .status {
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: #f0fdf4;
+      color: #15803d;
+      font-size: 12px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    /* Privacy */
+    .privacy {
+      background: #111827;
+      color: white;
+    }
+
+    .privacy .section-number {
+      color: #93c5fd;
+    }
+
+    .privacy .section-header p {
+      color: #9ca3af;
+    }
+
+    .privacy-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .privacy-card {
+      padding: 30px;
+      border-radius: var(--radius);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .privacy-card h3 {
+      margin-bottom: 16px;
+      font-size: 18px;
+    }
+
+    .privacy-card ul {
+      list-style: none;
+      display: grid;
+      gap: 12px;
+      color: #d1d5db;
+      font-size: 14px;
+    }
+
+    .privacy-card li::before {
+      content: "•";
+      margin-right: 9px;
+      color: #93c5fd;
+    }
+
+
+    /* Private Passkey Area */
+    .private-area {
+      background: #0b1220;
+      color: #fff;
+    }
+
+    .private-card {
+      padding: 30px;
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+    }
+
+    .private-card + .private-card {
+      margin-top: 18px;
+    }
+
+    .private-status {
+      margin: 16px 0 20px;
+      color: #cbd5e1;
+      font-size: 14px;
+    }
+
+    .private-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .private-notes {
+      display: grid;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .private-note {
+      padding: 18px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.08);
+    }
+
+    .private-note strong {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .passkey-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .passkey-item {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      padding: 14px 16px;
+      border-radius: 12px;
+      background: rgba(255,255,255,.06);
+    }
+
+    .passkey-item small {
+      display: block;
+      color: #94a3b8;
+      margin-top: 3px;
+    }
+
+    .btn-danger {
+      color: #fff;
+      background: #b91c1c;
+    }
+
+    .btn-danger:hover {
+      background: #991b1b;
+      transform: translateY(-2px);
+    }
+
+    /* Closing */
+    .closing {
+      text-align: center;
+      padding: 130px 0;
+    }
+
+    .closing h2 {
+      max-width: 720px;
+      margin: 0 auto 18px;
+      font-size: clamp(30px, 5vw, 50px);
+      letter-spacing: -0.05em;
+      line-height: 1.25;
+    }
+
+    .closing p {
+      color: var(--muted);
+      margin-bottom: 30px;
+    }
+
+    footer {
+      padding: 30px 0;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 13px;
+      text-align: center;
+    }
+
+    /* Responsive */
+    @media (max-width: 760px) {
+      .nav {
+        height: 64px;
+      }
+
+      .nav-links {
+        gap: 14px;
+        font-size: 12px;
+      }
+
+      .hero {
+        padding-top: 100px;
+      }
+
+      .hero p {
+        font-size: 16px;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .strength-grid,
+      .privacy-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .credential {
+        grid-template-columns: 1fr;
+        gap: 15px;
+      }
+
+      .status {
+        width: fit-content;
+      }
+
+      section {
+        padding: 80px 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="container nav">
+      <a href="#top" class="logo">PORTFOLIO.</a>
+
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#credentials">교육 및 자격</a></li>
+          <li><a href="#strength">강점</a></li>
+          <li><a href="#my-strengths">나의 강점</a></li>
+          <li><a href="#private">비공개 자리</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-content">
+          <div class="eyebrow">CAREER PORTFOLIO</div>
+
+          <h1>
+            배우고 증명하며<br>
+            <span>성장하는 개발자</span>
+          </h1>
+
+          <p>
+            교육 과정과 자격증을 통해 쌓아온 기술 역량을 바탕으로
+            실무에서 꾸준히 배우고 성장하는 인재가 되고자 합니다.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#privacy" class="btn btn-primary">
+              공개 범위 보기
+            </a>
+            <a href="#credentials" class="btn btn-secondary">
+              교육 및 자격 보기
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Credentials -->
+    <section id="credentials">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-number">01 / CREDENTIALS</div>
+          <h2>교육 및 자격</h2>
+          <p>취업 과정에서 보여드리고 싶은 핵심 이력입니다.</p>
+        </div>
+
+        <div class="credential-list">
+
+          <article class="credential">
+            <div class="credential-icon">EDU</div>
+            <div>
+              <h3>클라우드 보안 전문가 양성과정</h3>
+              <p>네트워크, 가상화, 리눅스 및 윈도우 시스템, 보안 아키텍처 등 인프라 전반을 실습 중심으로 학습한 실무 위주 6개월 과정</p>
+            </div>
+            <span class="status">이수</span>
+          </article>
+
+          <article class="credential">
+            <div class="credential-icon">EDU</div>
+            <div>
+              <h3>SKT New-Deal ALEPH 과정 이수</h3>
+              <p>네트워크 및 인프라 보안, 네트워크 망 구성, 바이브 코딩을 통한 보안 망 구성을 실습 중심으로 학습한 실무 위주 3개월 과정</p>
+            </div>
+            <span class="status">이수</span>
+          </article>
+
+          <article class="credential">
+            <div class="credential-icon">VCP</div>
+            <div>
+              <h3>VCP-DCV</h3>
+              <p>데이터센터 가상화를 다룰 수 있음</p>
+            </div>
+            <span class="status">취득</span>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Strength -->
+    <section id="strength">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-number">02 / STRENGTH</div>
+          <h2>취업 시 어필할 수 있는 역량</h2>
+          <p>현재 보유하고 있는 교육 경험과 자격을 중심으로 정리했습니다.</p>
+        </div>
+
+        <div class="strength-grid">
+
+          <article class="strength-card">
+            <div class="card-icon">01</div>
+            <h3>실무 중심 교육 경험 내용 1</h3>
+            <p>
+              2024년 7월부터 12월까지 한국 전파 진흥 협회에서 주관한 클라우드 보안 전문가 양성 과정을 이수하여 Cisco 패킷 트레이서를 이용한 네트워크 망, Vmware 기반 가상화, Linux/Window 서버, AWS 클라우드 등 IT 인프라 기술 습득. DELL 서버에 ESXi 설치를 통한 가상화 환경 구축 및 vCenter 기반 인프라 관리 실습. 가상 네트워크/시스템 망 설계 및 Linux 기반 SFTP, Syslog 서버 구축, 운영 실습 및 프로젝트.
+            </p>
+          </article>
+
+          <article class="strength-card">
+            <div class="card-icon">02</div>
+            <h3>실무 중심 교육 경험 내용 2</h3>
+            <p>
+              2026년 8월부터 11월까지 SKT에서 주관한 K-뉴딜 아카데미 SKT ALEPH 과정을 이수하여 Vmware Workstation을 활용한 보안 기초 이론 습득 및 실습. GNS를 활용한 네트워크 망 구성 및 인프라 실습.
+            </p>
+          </article>
+
+          <article class="strength-card">
+            <div class="card-icon">03</div>
+            <h3>데이터 활용 역량</h3>
+            <p>
+              SQL 과정을 학습하여 다루는 방법과 개념에 대해 공부하였고 기본적인 이해를 갖추었습니다.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Closing -->
+    <!-- My Strengths -->
+    <section id="my-strengths">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-number">03 / MY STRENGTHS</div>
+          <h2>나의 강점</h2>
+          <p>제가 가진 강점을 실제 경험을 바탕으로 소개합니다.</p>
+        </div>
+
+        <div class="strength-grid">
+          <article class="strength-card">
+            <div class="card-icon">01</div>
+            <h3>배려</h3>
+            <p>
+              상대방이 실습 시연 대상으로 뽑혀나가면 필기를 할 수 없어 나에게 시연을 대신 해달라 하였습니다. 나 또한 필기를 하지 못하게 되는 것을 감수하고 대신 시연하겠다 했습니다.
+            </p>
+          </article>
+
+          <article class="strength-card">
+            <div class="card-icon">02</div>
+            <h3>인내심</h3>
+            <p>
+              캡스톤 프로젝트에서 편입해온지 얼마 되지 않은 팀원들이 있었습니다. 이 팀원은 기초만 할 줄 알고 대부분의 것을 급히 습득해나가야 하는 상황이었는데, 이 팀원에게 스스로 학습할 수 있는 유튜브 채널들을 소개해주고 스스로 학습해나가며 자신의 몫을 수행할 수 있기까지 과제를 내며 프로젝트를 수행하고, 무사히 결과물을 내보일 수 있었습니다.
+            </p>
+          </article>
+
+          <article class="strength-card">
+            <div class="card-icon">03</div>
+            <h3>이끌어주기</h3>
+            <p>
+              ALEPH 수업 중 내가 먼저 앞서나가 알려줄 수 있는 과목이었습니다. 이해하지 못해 따라오지 못한 학생이 있을 때 먼저 다가가 어떤 식으로 하면 될지 알려준 적이 있었습니다. 덕분에 그 학생은 무사히 실습을 마쳤습니다.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- Private Passkey Area -->
+    <section id="private" class="private-area">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-number">04 / PRIVATE</div>
+          <h2>나만의 자리</h2>
+          <p>공개 소개 페이지와 분리된 비공개 영역입니다. 패스키 인증 후 서버에서 자료를 내려받습니다.</p>
+        </div>
+
+        <div class="private-card">
+          <h3>패스키 인증</h3>
+          <p id="passkey-status" class="private-status">비공개 자료를 보려면 패스키로 인증하세요.</p>
+          <div class="private-actions">
+            <button id="passkey-login" class="btn btn-primary" type="button">패스키로 들어가기</button>
+            <button id="passkey-logout" class="btn btn-secondary" type="button">로그아웃</button>
+          </div>
+        </div>
+
+        <div id="private-content" class="private-card" hidden>
+          <h3>비공개 자료</h3>
+          <p class="private-status">서버 인증이 성공한 뒤에만 아래 자료가 표시됩니다.</p>
+          <div id="private-notes" class="private-notes"></div>
+        </div>
+
+        <div id="passkey-management" class="private-card" hidden>
+          <h3>내 패스키 관리</h3>
+          <p class="private-status">패스키는 두 개 이상 등록해 두면 한 기기를 잃어도 다른 패스키로 들어갈 수 있습니다.</p>
+          <div id="passkey-list" class="passkey-list"></div>
+          <div class="private-actions">
+            <button id="passkey-register" class="btn btn-primary" type="button">새 패스키 등록</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="closing">
+      <div class="container">
+        <h2>
+          배운 것을 바탕으로<br>
+          실무에서 성장하겠습니다.
+        </h2>
+
+        <p>
+          교육과 자격증에서 멈추지 않고 실제 문제를 해결할 수 있는 역량을 만들어가겠습니다.
+        </p>
+
+        <a href="#top" class="btn btn-primary">처음으로</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      © 2026 My Portfolio. All rights reserved.
+    </div>
+  </footer>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.105.0"></script>
+  <script>
+    /*
+      Vercel 배포 전 아래 두 값만 입력합니다.
+      - SUPABASE_URL: Supabase Project URL
+      - SUPABASE_PUBLISHABLE_KEY: Supabase Publishable key
+      Secret/service_role key는 절대 이 파일에 넣지 않습니다.
+    */
+    const SUPABASE_URL = "https://zmflojkomojuzhuhrdrr.supabase.co";
+    const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_kCpd_cxjudgfgPaHlmwaEA_DsYECMrw";
+
+    const supabaseClient = supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_PUBLISHABLE_KEY,
+      {
+        auth: {
+          experimental: { passkey: true },
+          persistSession: false,
+          autoRefreshToken: false
+        }
+      }
+    );
+
+    const $ = (id) => document.getElementById(id);
+    const statusEl = $("passkey-status");
+    const privateContent = $("private-content");
+    const privateNotes = $("private-notes");
+    const management = $("passkey-management");
+    const passkeyList = $("passkey-list");
+
+    function setStatus(message) {
+      statusEl.textContent = message;
+    }
+
+    async function loadPrivateNotes() {
+      const { data, error } = await supabaseClient.functions.invoke("private-notes", {
+        method: "GET"
+      });
+
+      if (error) {
+        privateContent.hidden = true;
+        setStatus(`비공개 자료 조회 실패: ${error.message}`);
+        return;
+      }
+
+      privateNotes.innerHTML = data.notes.map(note => `
+        <article class="private-note">
+          <strong>${escapeHtml(note.title)}</strong>
+          <span>${escapeHtml(note.body)}</span>
+        </article>
+      `).join("");
+
+      privateContent.hidden = false;
+    }
+
+    function escapeHtml(value) {
+      return String(value).replace(/[&<>"']/g, (char) => ({
+        "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;"
+      }[char]));
+    }
+
+    async function refreshPasskeys() {
+      const { data, error } = await supabaseClient.auth.passkey.list();
+
+      if (error) {
+        passkeyList.innerHTML = `<p class="private-status">${escapeHtml(error.message)}</p>`;
+        return;
+      }
+
+      if (!data?.length) {
+        passkeyList.innerHTML = "<p class=\"private-status\">등록된 패스키가 없습니다.</p>";
+        return;
+      }
+
+      passkeyList.innerHTML = data.map((item) => `
+        <div class="passkey-item">
+          <div>
+            <strong>${escapeHtml(item.friendly_name || "내 패스키")}</strong>
+            <small>등록: ${new Date(item.created_at).toLocaleString("ko-KR")}</small>
+          </div>
+          <button class="btn btn-danger" type="button" data-delete-passkey="${escapeHtml(item.id)}">삭제</button>
+        </div>
+      `).join("");
+
+      document.querySelectorAll("[data-delete-passkey]").forEach(button => {
+        button.addEventListener("click", async () => {
+          if (!confirm("이 패스키를 삭제할까요?")) return;
+          const { error } = await supabaseClient.auth.passkey.delete({
+            passkeyId: button.dataset.deletePasskey
+          });
+          if (error) {
+            setStatus(`패스키 삭제 실패: ${error.message}`);
+            return;
+          }
+          setStatus("패스키를 삭제했습니다.");
+          await refreshPasskeys();
+        });
+      });
+    }
+
+    async function signInWithPasskey() {
+      setStatus("새 로그인 질문을 요청하고 있습니다...");
+      const { error } = await supabaseClient.auth.signInWithPasskey();
+
+      if (error) {
+        privateContent.hidden = true;
+        management.hidden = true;
+        setStatus(`패스키 로그인 실패: ${error.message}`);
+        return;
+      }
+
+      setStatus("패스키 인증 성공. 비공개 자료를 요청합니다.");
+      management.hidden = false;
+      await refreshPasskeys();
+      await loadPrivateNotes();
+    }
+
+    async function registerPasskey() {
+      const { data, error } = await supabaseClient.auth.registerPasskey();
+
+      if (error) {
+        setStatus(`패스키 등록 실패 또는 취소: ${error.message}`);
+        return;
+      }
+
+      setStatus(`새 패스키가 등록되었습니다. ID: ${data?.id || "등록 완료"}`);
+      await refreshPasskeys();
+    }
+
+    async function logout() {
+      await supabaseClient.auth.signOut();
+      privateContent.hidden = true;
+      management.hidden = true;
+      privateNotes.innerHTML = "";
+      setStatus("로그아웃되었습니다. 비공개 자료는 다시 인증해야 볼 수 있습니다.");
+    }
+
+    $("passkey-login").addEventListener("click", signInWithPasskey);
+    $("passkey-logout").addEventListener("click", logout);
+    $("passkey-register").addEventListener("click", registerPasskey);
+
+    // 페이지를 새로 열면 세션을 복구하지 않습니다.
+    // 비공개 자료는 반드시 다시 패스키 인증을 거쳐 서버에서 받아옵니다.
+  </script>
+
+</body>
+</html>

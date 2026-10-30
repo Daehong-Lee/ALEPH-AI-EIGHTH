@@ -1,0 +1,2 @@
+# Supabase CLI configuration
+# private-notes는 사용자 JWT가 없으면 Edge Gateway에서 먼저 거절되도록 기본 verify_jwt=true를 사용합니다.
